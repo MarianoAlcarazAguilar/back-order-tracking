@@ -3,3 +3,7 @@ transformed_data/back_orders/*
 transformed_data/inventarios/*
 transformed_data/transferencias/*
 */.DS_Store/*
+
+raw_data/transferencias/*
+raw_data/inventarios/*
+raw_data/forecasts/*
