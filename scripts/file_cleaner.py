@@ -683,6 +683,9 @@ class FileCleaner:
         nuevo_nombre = re.sub(r'\s*\(\d+\)', '', nombre_archivo)
         return nuevo_nombre
 
+    def encontrar_numeros_en_cadena(self, cadena):
+        numeros_encontrados = re.findall(r'-?\d+(?:\.\d+)?', cadena)
+        return numeros_encontrados
 
 if __name__ == '__main__':
     fc = FileCleaner(main=True)
