@@ -6,4 +6,4 @@ transformed_data/forecasts/*
 transformed_data/back_orders/*
 transformed_data/inventarios/*
 transformed_data/transferencias/*
-.DS_Store
+*/.DS_Store
