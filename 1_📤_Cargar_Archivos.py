@@ -57,6 +57,13 @@ def update_transferencias(fc: FileCleaner, fm: FileManager):
 
 
 def mariano_app():
+    st.set_page_config(
+        layout='wide', 
+        initial_sidebar_state='expanded',
+        page_title='Dragón',
+        page_icon='🐉'
+    )
+    
     fc = FileCleaner()
     fm = FileManager()
 

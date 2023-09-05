@@ -11,6 +11,13 @@ def download_button(data, file_name):
         )
 
 def render_page():
+    st.set_page_config(
+        layout='wide', 
+        initial_sidebar_state='expanded',
+        page_title='Dragón',
+        page_icon='🐉'
+    )
+    
     fm = FileManager()
     fc = FileCleaner()
 

@@ -130,6 +130,13 @@ def show_available_back_orders(fm: FileManager):
     download_button(bytes_data, file_name)
 
 def render_page():
+    st.set_page_config(
+        layout='wide', 
+        initial_sidebar_state='expanded',
+        page_title='Dragón',
+        page_icon='🐉'
+    )
+    
     # Permitamos generar reportes con archivos específicos
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
