@@ -14,3 +14,5 @@ for carpeta in "${carpetas[@]}"; do
 done
 
 pip install -r requirements.txt
+
+streamlit run 1_📤_Cargar_Archivos.py
