@@ -1,5 +1,5 @@
 */.DS_Store/*
-
+.DS_Store
 raw_data/transferencias/*
 raw_data/inventarios/*
 raw_data/forecasts/*
