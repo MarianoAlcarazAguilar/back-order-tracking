@@ -12,3 +12,5 @@ for carpeta in "${carpetas[@]}"; do
     echo "La carpeta ya existe: $carpeta"
   fi
 done
+
+pip install -r requirements.txt
