@@ -1,8 +1,8 @@
 */.DS_Store/*
 
-raw_data/transferencias/
-raw_data/inventarios/
-raw_data/forecasts/
+raw_data/transferencias/*
+raw_data/inventarios/*
+raw_data/forecasts/*
 
 transformed_data/back_orders/*
 transformed_data/forecasts/*
