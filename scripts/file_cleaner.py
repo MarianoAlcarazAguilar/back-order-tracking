@@ -377,7 +377,7 @@ class FileCleaner:
             planta=lambda df: df.apply(self.__clean_planta_name, axis=1)
         ) 
         .drop(['c_', 'pza_cja', 'um'], axis=1)
-        .pivot_table(index=['fecha', 'sku', 'descripcion'], columns='planta', values='cantidad', aggfunc=np.sum) # Hacemos el reporte por planta
+        .pivot_table(index=['fecha', 'sku', 'descripcion'], columns='planta', values='cantidad', aggfunc='sum') # Hacemos el reporte por planta
         .assign(total=lambda x: x.sum(axis=1)) # Sumamos el total
         .reset_index()
         .sort_values('sku')
