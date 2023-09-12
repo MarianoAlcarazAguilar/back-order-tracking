@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Verificar y crear las carpetas si no existen
-
 carpetas=("raw_data/transferencias" "raw_data/inventarios" "raw_data/forecasts" "transformed_data/back_orders" "transformed_data/forecasts" "transformed_data/inventarios" "transformed_data/transferencias")
 
 for carpeta in "${carpetas[@]}"; do
@@ -13,6 +12,4 @@ for carpeta in "${carpetas[@]}"; do
   fi
 done
 
-pip install -r requirements.txt
-
-./run_app.sh
+#pip install -r requirements.txt
