@@ -42,8 +42,11 @@ def update_transferencias(fc: FileCleaner, fm: FileManager):
     if len(uploaded_files) > 0:
         for file in uploaded_files:
             try:
+                # Llamamos a la función de limpieza
                 fc.clean_transferencias(file, 'transformed_data/transferencias')
+                # Guardamos el archivo de forma local
                 fm.save_file(file, 'raw_data/transferencias')
+                # Imrpimimos mensaje de success
                 st.success(f'{file.name} se cargó exitosamente')
             except:
                 try:

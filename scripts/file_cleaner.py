@@ -364,8 +364,8 @@ class FileCleaner:
         df_transferencias = pd.read_excel(file)
         
         columnas_necesarias = ['Nombre venta', 'Articulo', 'Descripción', 'Cantidad', 'UM', 'Almacén']
-        fecha = self.__extraer_fecha_from_nombre(file.name)
-        
+        fecha = self.__extraer_fecha_from_nombre(file.name)    
+           
         processed_transfers = (df_transferencias
         [columnas_necesarias]
         .rename(columns={'Nombre venta':'planta', 'Articulo':'sku', 'Cantidad':'cantidad', 'UM': 'um', 'Almacén':'almacen', 'Descripción':'descripcion'})
@@ -380,8 +380,10 @@ class FileCleaner:
         .pivot_table(index=['fecha', 'sku', 'descripcion'], columns='planta', values='cantidad', aggfunc='sum') # Hacemos el reporte por planta
         .assign(total=lambda x: x.sum(axis=1)) # Sumamos el total
         .reset_index()
+        .assign(sku=lambda x: x.sku.astype('str'))
         .sort_values('sku')
         )
+        print('Everything works so far')
         
         # Guardamos el archivo generado en formato excel bonito
         saving_name = f"transferencias_plantas_{fecha.replace('-','_')}"
