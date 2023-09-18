@@ -383,7 +383,6 @@ class FileCleaner:
         .assign(sku=lambda x: x.sku.astype('str'))
         .sort_values('sku')
         )
-        print('Everything works so far')
         
         # Guardamos el archivo generado en formato excel bonito
         saving_name = f"transferencias_plantas_{fecha.replace('-','_')}"
