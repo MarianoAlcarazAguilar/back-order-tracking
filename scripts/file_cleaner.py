@@ -17,12 +17,13 @@ else:
 
 
 class FileCleaner:
-    def __init__(self, main=False):
+    def __init__(self, main=False, data_dir:str='.'):
         self.ef = ExcelFunctions()
+        self.data_dir = data_dir
         if main:
             self.unidades = pd.read_csv(f'../static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
         else:
-            self.unidades = pd.read_csv(f'static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
+            self.unidades = pd.read_csv(f'{self.data_dir}/static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
 
     def __obtener_mes_actual_y_siguiente(self, forzar_fecha: str = None):
         if forzar_fecha is None:
@@ -256,7 +257,8 @@ class FileCleaner:
             ajuste_anchura = (max_length + 2)
             ws.column_dimensions[columna_letra].width = ajuste_anchura
 
-    def __get_latest_files(self, current_dir='.'):
+    def __get_latest_files(self): # def __get_latest_files(self, current_dir='.')
+        current_dir = self.data_dir
         dir_forecast = f'{current_dir}/transformed_data/forecasts/'
         dir_inventarios = f'{current_dir}/transformed_data/inventarios/'
         dir_transfers = f'{current_dir}/transformed_data/transferencias/'
@@ -481,10 +483,11 @@ class FileCleaner:
         
         print(f'{file_name} was updated succesfully')
 
-    def genera_reporte_back_order_especifico(self, files:dir, current_dir='.'):
+    def genera_reporte_back_order_especifico(self, files:dir):
         '''
         files es un diccionario de la forma {'forecast':filename, 'inventario':filename, 'transfers':filename}
         '''
+        current_dir = self.data_dir
         ef = ExcelFunctions()
 
         dir_back_orders = f'{current_dir}/transformed_data/back_orders'
@@ -581,12 +584,13 @@ class FileCleaner:
             'filename': filename
         }
 
-    def genera_reporte_back_order(self, current_dir='.'):
+    def genera_reporte_back_order(self): # def genera_reporte_back_order(self, current_dir='.'):
+        current_dir = self.data_dir
         ef = ExcelFunctions()
 
         dir_back_orders = f'{current_dir}/transformed_data/back_orders'
 
-        file_names, data_frames = self.__get_latest_files(current_dir=current_dir) # Extraemos y leemos los datos más recientes
+        file_names, data_frames = self.__get_latest_files() # Extraemos y leemos los datos más recientes
         forecast_filename, inventario_filename, transfer_filename = file_names # Los sacamos de la tupla
         forecast, inventario, transfers = data_frames
 
