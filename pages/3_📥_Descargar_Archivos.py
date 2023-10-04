@@ -11,6 +11,7 @@ def download_button(data, file_name):
         )
 
 def render_page():
+    data_dir = '.'
     st.set_page_config(
         layout='wide', 
         initial_sidebar_state='expanded',
@@ -21,7 +22,7 @@ def render_page():
     fm = FileManager()
     fc = FileCleaner()
 
-    with open('static_data/style.css') as f:
+    with open(f'{data_dir}/static_data/style.css') as f:
         # Cargamos el estilo de css (estoy utilizando uno de internet)
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
@@ -34,17 +35,17 @@ def render_page():
     type_of_file = st.sidebar.radio('Elige el tipo de archivo a descargar', ['Inventario', 'Forecast', 'Transferencias'])
 
     if type_of_file == 'Inventario':
-        download_inventarios(fm, fc)
+        download_inventarios(fm, fc, data_dir=data_dir)
 
     elif type_of_file == 'Forecast':
-        download_forecasts(fm)
+        download_forecasts(fm, data_dir=data_dir)
 
     elif type_of_file == 'Transferencias':
-        download_transfers(fm, fc)
+        download_transfers(fm, fc, data_dir=data_dir)
 
-def download_inventarios(fm: FileManager, fc: FileCleaner):
+def download_inventarios(fm: FileManager, fc: FileCleaner, data_dir:str):
     st.markdown("### Descarga Inventarios")
-    dir_location = 'raw_data/inventarios'
+    dir_location = f'{data_dir}/raw_data/inventarios'
     files = fm.get_files_on_directory(dir_location)
     files = fc.ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el inventario', files, label_visibility="hidden")
@@ -52,18 +53,18 @@ def download_inventarios(fm: FileManager, fc: FileCleaner):
     bytes_data, _ = fm.download_file(f'{dir_location}/{file_name}')
     download_button(bytes_data, file_name)
 
-def download_forecasts(fm: FileManager):
+def download_forecasts(fm: FileManager, data_dir:str):
     st.markdown("### Descarga Forecasts")
-    dir_location = 'raw_data/forecasts'
+    dir_location = f'{data_dir}/raw_data/forecasts'
     files = fm.get_files_on_directory(dir_location)
     file_name = st.selectbox('Elige el inventario', files, label_visibility="hidden")
 
     bytes_data, _ = fm.download_file(f'{dir_location}/{file_name}')
     download_button(bytes_data, file_name)
 
-def download_transfers(fm: FileManager, fc: FileCleaner):
+def download_transfers(fm: FileManager, fc: FileCleaner, data_dir:str):
     st.markdown("### Descarga Transferencias")
-    dir_location = 'raw_data/transferencias'
+    dir_location = f'{data_dir}/raw_data/transferencias'
     files = fm.get_files_on_directory(dir_location)
     files = fc.ordena_lista_transferencias(files)
     file_name = st.selectbox('Elige el inventario', files, label_visibility="hidden")
