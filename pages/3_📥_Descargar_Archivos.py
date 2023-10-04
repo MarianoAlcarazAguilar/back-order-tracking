@@ -11,7 +11,7 @@ def download_button(data, file_name):
         )
 
 def render_page():
-    data_dir = '.'
+    data_dir = 'data'
     st.set_page_config(
         layout='wide', 
         initial_sidebar_state='expanded',

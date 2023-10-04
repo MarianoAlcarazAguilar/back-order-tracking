@@ -130,7 +130,7 @@ def show_available_back_orders(fm: FileManager, data_dir:str):
     download_button(bytes_data, file_name)
 
 def render_page():
-    data_dir = '.'
+    data_dir = 'data'
     st.set_page_config(
         layout='wide', 
         initial_sidebar_state='expanded',

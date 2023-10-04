@@ -60,7 +60,7 @@ def update_transferencias(fc: FileCleaner, fm: FileManager, data_dir:str):
 
 
 def mariano_app():
-    data_dir = '.'
+    data_dir = 'data'
     st.set_page_config(
         layout='wide', 
         initial_sidebar_state='expanded',
