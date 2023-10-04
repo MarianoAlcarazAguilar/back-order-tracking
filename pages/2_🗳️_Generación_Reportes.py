@@ -10,9 +10,9 @@ def download_button(data, file_name):
             file_name=file_name
         )
 
-def show_available_inventarios(fm: FileManager):
+def show_available_inventarios(fm: FileManager, data_dir:str):
     st.markdown('## Inventarios')
-    dir_location = 'transformed_data/inventarios'
+    dir_location = f'{data_dir}/transformed_data/inventarios'
     files = fm.get_files_on_directory(dir_location)
     files = FileCleaner().ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el archivo', files)
@@ -20,18 +20,18 @@ def show_available_inventarios(fm: FileManager):
     download_button(bytes_data, file_name)
 
 
-def show_available_forecasts(fm: FileManager):
+def show_available_forecasts(fm: FileManager, data_dir:str):
     st.markdown('## Forecasts')
-    dir_location = 'transformed_data/forecasts'
+    dir_location = f'{data_dir}/transformed_data/forecasts'
     files = fm.get_files_on_directory(dir_location)
     file_name = st.selectbox('Elige el archivo', files)
     bytes_data, _ = fm.download_file(f'{dir_location}/{file_name}')
     download_button(bytes_data, file_name)
 
 
-def show_available_transferencias(fm: FileManager):
+def show_available_transferencias(fm: FileManager, data_dir:str):
     st.markdown('## Transferencias')
-    dir_location = 'transformed_data/transferencias'
+    dir_location = f'{data_dir}/transformed_data/transferencias'
     files = fm.get_files_on_directory(dir_location)
     orderd_files = FileCleaner().ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el archivo', orderd_files)
@@ -55,7 +55,7 @@ def reset_session_state():
     unclick_button()
     unclick_crear_reporte()
 
-def show_available_back_orders(fm: FileManager):
+def show_available_back_orders(fm: FileManager, data_dir:str):
     st.markdown('## Back Orders')
     fc = FileCleaner()
 
@@ -77,9 +77,9 @@ def show_available_back_orders(fm: FileManager):
     if st.session_state.clicked:
 
         # Tengo que darle la oportunidad de elegir los archivos que desee
-        transfers_dir = 'transformed_data/transferencias'
-        forecasts_dir = 'transformed_data/forecasts'
-        inventario_dir = 'transformed_data/inventarios'
+        transfers_dir = f'{data_dir}/transformed_data/transferencias'
+        forecasts_dir = f'{data_dir}/transformed_data/forecasts'
+        inventario_dir = f'{data_dir}/transformed_data/inventarios'
         
         # Leemos los diccionarios
         transfers_files = fm.get_files_on_directory(transfers_dir)
@@ -122,7 +122,7 @@ def show_available_back_orders(fm: FileManager):
 
 
     # Permitimos descargar nuevos reportes
-    dir_location = 'transformed_data/back_orders'
+    dir_location = f'{data_dir}/transformed_data/back_orders'
     files = fm.get_files_on_directory(dir_location)
     files = fc.ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el archivo que deseas descargar', files, label_visibility='visible')
@@ -130,6 +130,7 @@ def show_available_back_orders(fm: FileManager):
     download_button(bytes_data, file_name)
 
 def render_page():
+    data_dir = '.'
     st.set_page_config(
         layout='wide', 
         initial_sidebar_state='expanded',
@@ -146,7 +147,7 @@ def render_page():
 
     fm = FileManager()
 
-    with open('static_data/style.css') as f:
+    with open(f'{data_dir}/static_data/style.css') as f:
         # Cargamos el estilo de css (estoy utilizando uno de internet)
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
@@ -159,13 +160,13 @@ def render_page():
     type_of_file = st.sidebar.radio('Elige el tipo de archivo a subir', ['Inventario', 'Forecast', 'Transferencias', 'Back Orders'], on_change=reset_session_state)
 
     if type_of_file == 'Inventario':
-        show_available_inventarios(fm)
+        show_available_inventarios(fm, data_dir=data_dir)
     elif type_of_file == 'Forecast':
-        show_available_forecasts(fm)
+        show_available_forecasts(fm, data_dir=data_dir)
     elif type_of_file == 'Transferencias':
-        show_available_transferencias(fm)
+        show_available_transferencias(fm, data_dir=data_dir)
     elif type_of_file == 'Back Orders':
-        show_available_back_orders(fm)   
+        show_available_back_orders(fm, data_dir=data_dir)   
 
 if __name__ == "__main__":
     render_page()
