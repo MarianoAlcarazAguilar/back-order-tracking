@@ -14,7 +14,7 @@ def show_available_inventarios(fm: FileManager, data_dir:str):
     st.markdown('## Inventarios')
     dir_location = f'{data_dir}/transformed_data/inventarios'
     files = fm.get_files_on_directory(dir_location)
-    files = FileCleaner().ordena_lista_nombres_con_fecha(files)
+    files = FileCleaner(data_dir=data_dir).ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el archivo', files)
     bytes_data, _ = fm.download_file(f'{dir_location}/{file_name}')
     download_button(bytes_data, file_name)
@@ -33,7 +33,7 @@ def show_available_transferencias(fm: FileManager, data_dir:str):
     st.markdown('## Transferencias')
     dir_location = f'{data_dir}/transformed_data/transferencias'
     files = fm.get_files_on_directory(dir_location)
-    orderd_files = FileCleaner().ordena_lista_nombres_con_fecha(files)
+    orderd_files = FileCleaner(data_dir=data_dir).ordena_lista_nombres_con_fecha(files)
     file_name = st.selectbox('Elige el archivo', orderd_files)
     bytes_data, _ = fm.download_file(f'{dir_location}/{file_name}')
     download_button(bytes_data, file_name)
@@ -57,7 +57,7 @@ def reset_session_state():
 
 def show_available_back_orders(fm: FileManager, data_dir:str):
     st.markdown('## Back Orders')
-    fc = FileCleaner()
+    fc = FileCleaner(data_dir=data_dir)
 
     # Permitimos generar nuevos reportes
     if st.sidebar.button('Generar Reporte de Hoy', on_click=unclick_crear_reporte):

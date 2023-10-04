@@ -20,7 +20,7 @@ def render_page():
     )
     
     fm = FileManager()
-    fc = FileCleaner()
+    fc = FileCleaner(data_dir=data_dir)
 
     with open(f'{data_dir}/static_data/style.css') as f:
         # Cargamos el estilo de css (estoy utilizando uno de internet)

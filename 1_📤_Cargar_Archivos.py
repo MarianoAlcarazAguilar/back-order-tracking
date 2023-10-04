@@ -68,7 +68,7 @@ def mariano_app():
         page_icon='🐉'
     )
     
-    fc = FileCleaner()
+    fc = FileCleaner(data_dir=data_dir)
     fm = FileManager()
 
     with open(f'{data_dir}/static_data/style.css') as f:
