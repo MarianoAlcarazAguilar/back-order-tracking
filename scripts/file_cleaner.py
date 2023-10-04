@@ -23,7 +23,7 @@ class FileCleaner:
         if main:
             self.unidades = pd.read_csv(f'../static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
         else:
-            self.unidades = pd.read_csv(f'{self.data_dir}/static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
+            self.unidades = pd.read_csv(f'static_data/conversion_unidades.csv', usecols=['sku', 'pza_cja'])
 
     def __obtener_mes_actual_y_siguiente(self, forzar_fecha: str = None):
         if forzar_fecha is None:
@@ -499,7 +499,7 @@ class FileCleaner:
         inventario = pd.read_excel(f'{dir_inventarios}/{files["inventario"]}')[['sku', 'inventario']]
         transfers = pd.read_excel(f'{dir_transfers}/{files["transfers"]}')[['sku', 'total']]
 
-        clasificaciones = pd.read_excel(f'{current_dir}/static_data/clasificacion_abc.xlsx').drop(['planta'], axis=1)
+        clasificaciones = pd.read_excel(f'static_data/clasificacion_abc.xlsx').drop(['planta'], axis=1)
 
         # Transformamos el forecast y guardamos los nombres de las columnas
         forecast = (forecast
@@ -594,7 +594,7 @@ class FileCleaner:
         forecast_filename, inventario_filename, transfer_filename = file_names # Los sacamos de la tupla
         forecast, inventario, transfers = data_frames
 
-        clasificaciones = pd.read_excel(f'{current_dir}/static_data/clasificacion_abc.xlsx').drop(['planta'], axis=1)
+        clasificaciones = pd.read_excel(f'static_data/clasificacion_abc.xlsx').drop(['planta'], axis=1)
 
         # Transformamos el forecast y guardamos los nombres de las columnas
         forecast = (forecast

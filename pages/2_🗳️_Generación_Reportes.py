@@ -147,7 +147,7 @@ def render_page():
 
     fm = FileManager()
 
-    with open(f'{data_dir}/static_data/style.css') as f:
+    with open(f'static_data/style.css') as f:
         # Cargamos el estilo de css (estoy utilizando uno de internet)
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
