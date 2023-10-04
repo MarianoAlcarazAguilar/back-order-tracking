@@ -3,6 +3,7 @@
 raw_data/transferencias/*
 raw_data/inventarios/*
 raw_data/forecasts/*
+data/
 
 transformed_data/back_orders/*
 transformed_data/forecasts/*
