@@ -1,13 +1,6 @@
 */.DS_Store/*
 .DS_Store
-raw_data/transferencias/*
-raw_data/inventarios/*
-raw_data/forecasts/*
-data/
-
-transformed_data/back_orders/*
-transformed_data/forecasts/*
-transformed_data/inventarios/*
-transformed_data/transferencias/*
+data_volumen/
 scripts/.ipynb_checkpoints/
 scripts/__pycache__/
+scripts/auxiliares

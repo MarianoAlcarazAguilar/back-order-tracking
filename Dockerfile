@@ -7,11 +7,17 @@ WORKDIR /app
 # Copiamos todos los archivos a la imagen 
 # Aquí vale la pena mencionar que lo estoy haciendo de forma simplificada
 # En realidad debería de eliminar todos los archivos de excel que ya existen
-COPY . /app/
+COPY data/ /app/data/
+COPY pages/ /app/pages/
+COPY scripts/ /app/scripts/
+COPY static_data/ /app/static_data/
+COPY 1__Cargar_Archivos.py /app/
+COPY requirements.txt /app/
 
 # Montamos todo para que pueda ejecutarse la aplicación
 # Yo no lo voy a hacer dentro de un ambiente virtual.
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt 
+RUN mv 1__Cargar_Archivos.py 1_📤_Cargar_Archivos.py
 
 # Mencionamos el puerto que vamos a exponer al ejecutar el contenedor
 ENV PORT 8501
