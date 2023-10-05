@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copiamos todos los archivos a la imagen 
 # Aquí vale la pena mencionar que lo estoy haciendo de forma simplificada
-# En realidad debería de eliminar todos los archivos de excel que ya existen
+# En realidad debería de eliminar todos los archivos de excel que ya existen 
 RUN ./set_env.sh
 COPY pages/ /app/pages/
 COPY scripts/ /app/scripts/
