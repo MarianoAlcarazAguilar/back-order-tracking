@@ -7,7 +7,7 @@ WORKDIR /app
 # Copiamos todos los archivos a la imagen 
 # Aquí vale la pena mencionar que lo estoy haciendo de forma simplificada
 # En realidad debería de eliminar todos los archivos de excel que ya existen 
-RUN ./set_env.sh
+COPY set_env.sh /app/
 COPY pages/ /app/pages/
 COPY scripts/ /app/scripts/
 COPY static_data/ /app/static_data/
@@ -18,6 +18,7 @@ COPY requirements.txt /app/
 # Yo no lo voy a hacer dentro de un ambiente virtual.
 RUN pip install -r requirements.txt 
 RUN mv 1__Cargar_Archivos.py 1_📤_Cargar_Archivos.py
+RUN ./set_env.sh
 
 # Mencionamos el puerto que vamos a exponer al ejecutar el contenedor
 ENV PORT 8501
