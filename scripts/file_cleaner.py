@@ -437,8 +437,13 @@ class FileCleaner:
 
         # Tenemos que agregar los nombres de los siguientes dos meses para la extraccion
         meses = self.__obtener_mes_actual_y_siguiente()
-        # Le agregamos el año actual a los meses a extraer
-        otros_meses = [f'{mes}_{datetime.now().year}' for mes in meses] # NEW NEW NEW
+        if "december" in meses and "january" in meses:
+            this_year = datetime.now().year
+            otros_meses = [f"december_{this_year}", f"january_{this_year+1}"]
+        else:
+            # Le agregamos el año actual a los meses a extraer
+            # Aquí hay un problema en diciembre: enero no te lo manda al siguiente año
+            otros_meses = [f'{mes}_{datetime.now().year}' for mes in meses] # NEW NEW NEW
         otro_cols_to_extract = wanted_cols + otros_meses # NEW NEW NEW
 
         for i, mes in enumerate(meses):
