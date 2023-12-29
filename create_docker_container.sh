@@ -2,7 +2,7 @@
 
 # Creamos volumen para los datos solo si este no existe
 VOLUME_NAME="bo-data"
-IMAGE_NAME="bo-image:latest"
+IMAGE_NAME="bo-image:v2"
 CONTAINER_NAME="bo-container"
 
 # Verificar si la imagen ya existe
@@ -29,10 +29,10 @@ if docker ps -a --format '{{.Names}}' | grep -q "$CONTAINER_NAME"; then
 else
     # Crear el contenedor si no existe
     docker run -d \
-    -v bo-data:/app/data \
-    --name bo-container \
+    -v $VOLUME_NAME:/app/data \
+    --name $CONTAINER_NAME \
     -p 80:8501 \
-    bo-image:latest
+    $IMAGE_NAME
     echo "El contenedor $CONTAINER_NAME ha sido creado."
 fi
 
